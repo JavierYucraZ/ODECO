@@ -12,11 +12,14 @@ switch ($_GET['service']) {
         $result = $proyecto -> getAll();
         echo json_encode($result);
         break;
-    case "filter":
-        $result = $proyecto -> filterByPeriod($body['inicio'], $body['fin']);
+    case "filterByPeriod":
+        if(isset($body['operador'])){
+            $result = $proyecto -> filterByPeriod($body['inicio'],$body['fin'],$body['operador']);
+        }else{
+            $result = $proyecto -> filterByPeriod($body['inicio'],$body['fin'], 1);
+        }
         echo json_encode($result);
         break;
-    
 }
 
 
