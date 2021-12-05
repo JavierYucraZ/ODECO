@@ -15,7 +15,6 @@ class Proyecto extends Conexion{
         $conexion = parent::Conexion();
         parent::set_names();
         if($operador == 1){
-            $sql = "SELECT * FROM registros WHERE fecha_reclamo BETWEEN :inicio AND :fin ORDER BY fecha_reclamo ASC";
             $sql = "SELECT * FROM registros WHERE STR_TO_DATE(`fecha_reclamo`, '%d/%m/%Y') BETWEEN :inicio AND :fin ORDER BY STR_TO_DATE(`fecha_reclamo`, '%d/%m/%Y') ASC";
             $sql = $conexion -> prepare($sql);
         }else{
