@@ -29,6 +29,17 @@ class Proyecto extends Conexion{
         return $resultado;
     }
 
+    public function reqProcedure($operador){
+        $conexion = parent::Conexion();
+        parent::set_names();
+        $sql = 'CALL getAllByClaimAndOperator(:operador)';
+        $sql = $conexion -> prepare($sql);
+        $sql -> bindParam(":operador",$operador);
+        $sql -> execute();
+        $resultado = $sql -> fetchAll(PDO::FETCH_ASSOC);
+        return $resultado;
+    }
+
     
    
 }

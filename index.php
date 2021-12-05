@@ -123,7 +123,8 @@ include("./Public/sql/requestData.php");
                                             </div>
 
                                         </form>
-                                        <p class="text-muted">*La búsqueda por periodo se realiza en base a la fecha de reclamo</p>
+                                        <p class="text-muted">*La búsqueda por periodo se realiza en base a la fecha de
+                                            reclamo</p>
                                     </div>
                                 </div>
 
@@ -133,7 +134,9 @@ include("./Public/sql/requestData.php");
                 </div>
             </div>
 
-            <div id="chart"></div>
+            <div class="container">
+                <div id="chart"></div>
+            </div>
 
             <footer>
                 <div class="container">
@@ -147,7 +150,6 @@ include("./Public/sql/requestData.php");
         </div>
     </div>
     <?php include("./Public/shared/scripts.html") ?>
-    <!-- <script src="./Public/js/requestData.js" defer></script> -->
     <script src="./Public/mazer/vendors/simple-datatables/simple-datatables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="./Public/js/MainChart.js"></script>
@@ -157,7 +159,7 @@ include("./Public/sql/requestData.php");
     let dataTable = new simpleDatatables.DataTable(table1);
     document.querySelector("button#toExcel").addEventListener("click", () => {
         dataTable.export({
-            type:"csv",
+            type: "csv",
             download: true,
             filename: "reporte",
             columnDelimiter: ";"

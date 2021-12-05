@@ -20,6 +20,10 @@ switch ($_GET['service']) {
         }
         echo json_encode($result);
         break;
+    case "getAllClaimByOperator":
+        $result = $proyecto -> reqProcedure($body['operador']);
+        echo json_encode($result);
+        break;
 }
 
 
