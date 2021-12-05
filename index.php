@@ -115,7 +115,7 @@ include("./Public/sql/requestData.php");
                                                         <option value="AXS">AXS</option>
                                                     </select>
                                                 </div>
-                                                <div class="col-12 col-md-2 align-self-end">
+                                                <div class="col-12 col-md-2 align-self-end my-2 my-md-0">
                                                     <button class="btn btn-success" name="custom">
                                                         Aplicar Filtro
                                                     </button>
@@ -123,6 +123,7 @@ include("./Public/sql/requestData.php");
                                             </div>
 
                                         </form>
+                                        <p class="text-muted">*La búsqueda por periodo se realiza en base a la fecha de reclamo</p>
                                     </div>
                                 </div>
 

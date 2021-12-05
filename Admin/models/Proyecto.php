@@ -12,21 +12,19 @@ class Proyecto extends Conexion{
     }
 
     public function filterByPeriod($inicio, $fin, $operador){
-        $startDate = date("d/m/Y",strtotime($inicio));
-        $endDate = date("d/m/Y",strtotime($fin));
-        
         $conexion = parent::Conexion();
         parent::set_names();
         if($operador == 1){
             $sql = "SELECT * FROM registros WHERE fecha_reclamo BETWEEN :inicio AND :fin ORDER BY fecha_reclamo ASC";
+            $sql = "SELECT * FROM registros WHERE STR_TO_DATE(`fecha_reclamo`, '%d/%m/%Y') BETWEEN :inicio AND :fin ORDER BY STR_TO_DATE(`fecha_reclamo`, '%d/%m/%Y') ASC";
             $sql = $conexion -> prepare($sql);
         }else{
-            $sql = "SELECT * FROM registros WHERE operador = :operador AND fecha_reclamo BETWEEN :inicio AND :fin ORDER BY fecha_reclamo ASC";
+            $sql = "SELECT * FROM registros WHERE operador = :operador AND STR_TO_DATE(`fecha_reclamo`, '%d/%m/%Y') BETWEEN :inicio AND :fin ORDER BY STR_TO_DATE(`fecha_reclamo`, '%d/%m/%Y') ASC";
             $sql = $conexion -> prepare($sql);
             $sql -> bindParam(":operador",$operador);
         }
-        $sql -> bindParam(":inicio",$startDate);
-        $sql -> bindParam(":fin",$endDate);
+        $sql -> bindParam(":inicio",$inicio);
+        $sql -> bindParam(":fin",$fin);
         $sql -> execute();
         $resultado = $sql -> fetchAll(PDO::FETCH_ASSOC);
         return $resultado;
