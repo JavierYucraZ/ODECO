@@ -151,7 +151,6 @@ include("./Public/sql/requestData.php");
     </div>
     <?php include("./Public/shared/scripts.html") ?>
     <script src="./Public/mazer/vendors/simple-datatables/simple-datatables.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="./Public/js/MainChart.js"></script>
     <script>
     // Simple Datatable
