@@ -9,7 +9,7 @@ const reqAllClaimByOperator = async (operador) => {
     }
   );
   const response = await request.json();
-  const arrayClaim = Object.values(response[0]);
+  const arrayClaim = Object.values(response);
   return arrayClaim;
 };
 
@@ -18,8 +18,6 @@ const Main = async () => {
   const viva = await reqAllClaimByOperator("VIVA");
   const entel = await reqAllClaimByOperator("ENTEL");
   const tigo = await reqAllClaimByOperator("TIGO");
-
-  console.log(tigo)
 
   var options = {
     series: [

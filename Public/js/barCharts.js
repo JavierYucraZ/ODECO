@@ -1,95 +1,86 @@
-var options = {
-  series: [
-    {
-      data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380],
-    },
-  ],
-  chart: {
-    type: "bar",
-    height: 380,
-  },
-  plotOptions: {
-    bar: {
-      barHeight: "100%",
-      distributed: true,
-      horizontal: true,
-      dataLabels: {
-        position: "bottom",
+import { countResolutionByCategory, reqData } from "./helper.js";
+
+const Main = async () => {
+  const data = await reqData();
+  // console.log(data);
+
+  const improcedente = countResolutionByCategory(data, "IMPROCEDENTE");
+  const par_proc = countResolutionByCategory(data, "PARCIALMENTE PROCEDENTE");
+  const procedente = countResolutionByCategory(data, "PROCEDENTE");
+
+  var options = {
+    series: [
+      {
+        data: [
+          improcedente[improcedente.length - 1],
+          par_proc[par_proc.length - 1],
+          procedente[procedente.length - 1],
+        ],
       },
-    },
-  },
-  colors: [
-    "#33b2df",
-    "#546E7A",
-    "#d4526e",
-    "#13d8aa",
-    "#A5978B",
-    "#2b908f",
-    "#f9a3a4",
-    "#90ee7e",
-    "#f48024",
-    "#69d2e7",
-  ],
-  dataLabels: {
-    enabled: true,
-    textAnchor: "start",
-    style: {
-      colors: ["#fff"],
-    },
-    formatter: function (val, opt) {
-      return opt.w.globals.labels[opt.dataPointIndex] + ":  " + val;
-    },
-    offsetX: 0,
-    dropShadow: {
-      enabled: true,
-    },
-  },
-  stroke: {
-    width: 1,
-    colors: ["#fff"],
-  },
-  xaxis: {
-    categories: [
-      "South Korea",
-      "Canada",
-      "United Kingdom",
-      "Netherlands",
-      "Italy",
-      "France",
-      "Japan",
-      "United States",
-      "China",
-      "India",
     ],
-  },
-  yaxis: {
-    labels: {
-      show: false,
+    chart: {
+      type: "bar",
+      height: 380,
     },
-  },
-  title: {
-    text: "Custom DataLabels",
-    align: "center",
-    floating: true,
-  },
-  subtitle: {
-    text: "Category Names as DataLabels inside bars",
-    align: "center",
-  },
-  tooltip: {
-    theme: "dark",
-    x: {
-      show: false,
-    },
-    y: {
-      title: {
-        formatter: function () {
-          return "";
+    plotOptions: {
+      bar: {
+        barHeight: "100%",
+        distributed: true,
+        horizontal: true,
+        dataLabels: {
+          position: "bottom",
         },
       },
     },
-  },
+    colors: ["#33b2df", "#546E7A", "#d4526e"],
+    dataLabels: {
+      enabled: true,
+      textAnchor: "start",
+      style: {
+        colors: ["#fff"],
+      },
+      formatter: function (val, opt) {
+        return opt.w.globals.labels[opt.dataPointIndex] + ":  " + val;
+      },
+      offsetX: 0,
+      dropShadow: {
+        enabled: true,
+      },
+    },
+    stroke: {
+      width: 1,
+      colors: ["#fff"],
+    },
+    xaxis: {
+      categories: ["IMPROCEDENTE", "PARCIALMENTE PROCEDENTE", "PROCEDENTE"],
+    },
+    yaxis: {
+      labels: {
+        show: false,
+      },
+    },
+    title: {
+      text: "Tipo de Resolucion",
+      align: "center",
+      floating: true,
+    },
+    tooltip: {
+      theme: "dark",
+      x: {
+        show: false,
+      },
+      y: {
+        title: {
+          formatter: function () {
+            return "";
+          },
+        },
+      },
+    },
+  };
+
+  var chart = new ApexCharts(document.querySelector("#bar"), options);
+  chart.render();
 };
 
-var chart = new ApexCharts(document.querySelector("#bar"), options);
-chart.render();
+Main();

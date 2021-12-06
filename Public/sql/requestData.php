@@ -1,5 +1,6 @@
 <?php 
 
+include_once("./Admin/config/sesion.php");
 include_once("./Admin/config/conexion.php");
 include_once("./Admin/models/Proyecto.php");
 
@@ -13,8 +14,9 @@ if(isset($_POST['custom'])){
         $registros = $proyecto -> filterByPeriod($_POST['inicio'],$_POST['fin'],1);
     }
 }else{
-    $registros = $proyecto -> getAll();
+    $registros = $proyecto -> getAll();    
 }
 
+$_SESSION['data'] = $registros;
 
 ?>

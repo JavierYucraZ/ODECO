@@ -1,3 +1,8 @@
+<?php 
+
+include_once("./Admin/config/sesion.php");
+
+?>
 <?php $title = "Reclamos por Operador" ?>
 <?php include("./Public/shared/head.php"); ?>
 </head>
@@ -5,24 +10,7 @@
 <body>
     <div id="app">
         <div id="main" class="layout-horizontal">
-            <header class="mb-5">
-                <div class="header-top">
-                    <div class="container d-lg-flex justify-content-lg-center">
-                        <div class="logo">
-                            <!-- <a href="index.html"><img src="Public/mazer/images/logo/logo.png" alt="Logo"/></a> -->
-                            <span class="display-4">
-                                Logo Aquí
-                            </span>
-                        </div>
-                        <div class="header-top-right">
-                            <a href="#" class="burger-btn d-block d-xl-none">
-                                <i class="bi bi-justify fs-3"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <?php include("./Public/shared/navbar.html") ?>
-            </header>
+            <?php include("./Public/shared/navbar.html") ?>
 
             <div class="content-wrapper container-fluid">
                 <div class="page-heading">
@@ -33,12 +21,15 @@
                         <div class="col-12">
                             <section class="section">
                                 <div class="card py-5">
-                                    <div class="row">
+                                    <div class="row justify-content-center">
                                         <div class="col-12 col-md-6">
                                             <div id="columns"></div>
                                         </div>
                                         <div class="col-12 col-md-6">
                                             <div id="bar"></div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div id="pie"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -60,8 +51,9 @@
         </div>
     </div>
     <?php include("./Public/shared/scripts.html") ?>
-    <script src="./Public/js/columnCharts.js"></script>
-    <script src="./Public/js/barCharts.js"></script>
+    <script src="./Public/js/columnCharts.js" type="module"></script>
+    <script src="./Public/js/barCharts.js" type="module"></script>
+    <script src="./Public/js/pieChart.js" type="module"></script>
 </body>
 
 </html>

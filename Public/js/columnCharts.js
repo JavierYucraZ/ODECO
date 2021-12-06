@@ -1,96 +1,74 @@
-var options = {
-  series: [
-    {
-      name: "Inflation",
-      data: [2.3, 3.1, 4.0, 10.1, 4.0, 3.6, 3.2, 2.3, 1.4, 0.8, 0.5, 0.2],
+import { reqData, allOperatorsSame, countClaimsByOperator } from "./helper.js";
+
+const Main = async () => {
+  const data = await reqData();
+
+  // console.log(data.length);
+
+  const allAXS = allOperatorsSame(data, "AXS");
+  const allVIVA = allOperatorsSame(data, "VIVA");
+  const allENTEL = allOperatorsSame(data, "ENTEL");
+  const allTIGO = allOperatorsSame(data, "TIGO");
+
+  let values = [],
+    categories = [];
+
+  if (allAXS || allVIVA || allENTEL || allTIGO) {
+    values = [data.length];
+    const nameOperator = data.find((item) => {
+      return item.operador;
+    });
+    categories = [nameOperator.operador];
+  } else {
+    const countAXS = countClaimsByOperator(data, "AXS");
+    const countVIVA = countClaimsByOperator(data, "VIVA");
+    const countTIGO = countClaimsByOperator(data, "TIGO");
+    const countENTEL = countClaimsByOperator(data, "ENTEL");
+    values = [
+      countAXS[countAXS.length - 1],
+      countVIVA[countVIVA.length - 1],
+      countENTEL[countENTEL.length - 1],
+      countTIGO[countTIGO.length - 1],
+    ];
+    categories = ["AXS", "VIVA", "ENTEL", "TIGO"];
+  }
+
+  var options = {
+    series: [
+      {
+        name: "Reclamos",
+        data: values,
+      },
+    ],
+    chart: {
+      height: 350,
+      type: "bar",
     },
-  ],
-  chart: {
-    height: 350,
-    type: "bar",
-  },
-  plotOptions: {
-    bar: {
-      borderRadius: 10,
-      dataLabels: {
-        position: "top", // top, center, bottom
+    colors: ["#abc", "#dda", "#12d", "#aab147"],
+    plotOptions: {
+      bar: {
+        columnWidth: "45%",
+        distributed: true,
       },
     },
-  },
-  dataLabels: {
-    enabled: true,
-    formatter: function (val) {
-      return val + "%";
+    dataLabels: {
+      enabled: false,
     },
-    offsetY: -20,
-    style: {
-      fontSize: "12px",
-      colors: ["#304758"],
-    },
-  },
-
-  xaxis: {
-    categories: [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ],
-    position: "top",
-    axisBorder: {
+    legend: {
       show: false,
     },
-    axisTicks: {
-      show: false,
-    },
-    crosshairs: {
-      fill: {
-        type: "gradient",
-        gradient: {
-          colorFrom: "#D8E3F0",
-          colorTo: "#BED1E6",
-          stops: [0, 100],
-          opacityFrom: 0.4,
-          opacityTo: 0.5,
+    xaxis: {
+      categories: categories,
+      labels: {
+        style: {
+          fontSize: "12px",
         },
       },
     },
-    tooltip: {
-      enabled: true,
-    },
-  },
-  yaxis: {
-    axisBorder: {
-      show: false,
-    },
-    axisTicks: {
-      show: false,
-    },
-    labels: {
-      show: false,
-      formatter: function (val) {
-        return val + "%";
-      },
-    },
-  },
-  title: {
-    text: "Monthly Inflation in Argentina, 2002",
-    floating: true,
-    offsetY: 330,
-    align: "center",
-    style: {
-      color: "#444",
-    },
-  },
+  };
+
+  var chart = new ApexCharts(document.querySelector("#columns"), options);
+  chart.render();
 };
 
-var chart = new ApexCharts(document.querySelector("#columns"), options);
-chart.render();
+Main();

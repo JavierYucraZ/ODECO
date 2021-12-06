@@ -36,7 +36,7 @@ class Proyecto extends Conexion{
         $sql = $conexion -> prepare($sql);
         $sql -> bindParam(":operador",$operador);
         $sql -> execute();
-        $resultado = $sql -> fetchAll(PDO::FETCH_ASSOC);
+        $resultado = $sql -> fetch(PDO::FETCH_ASSOC);
         return $resultado;
     }
 

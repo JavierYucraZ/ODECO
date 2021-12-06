@@ -1,4 +1,6 @@
-<?php $title = "Bienvenido" ?>
+<?php 
+$title = "Bienvenido";
+?>
 <?php 
 include("./Public/shared/head.php");
 include("./Public/sql/requestData.php");
@@ -9,24 +11,7 @@ include("./Public/sql/requestData.php");
 <body>
     <div id="app">
         <div id="main" class="layout-horizontal">
-            <header class="mb-5">
-                <div class="header-top">
-                    <div class="container d-lg-flex justify-content-lg-center">
-                        <div class="logo">
-                            <!-- <a href="index.html"><img src="Public/mazer/images/logo/logo.png" alt="Logo"/></a> -->
-                            <span class="display-4">
-                                Logo Aquí
-                            </span>
-                        </div>
-                        <div class="header-top-right">
-                            <a href="#" class="burger-btn d-block d-xl-none">
-                                <i class="bi bi-justify fs-3"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <?php include("./Public/shared/navbar.html") ?>
-            </header>
+            <?php include("./Public/shared/navbar.html") ?>
 
             <div class="content-wrapper container-fluid">
                 <div class="page-heading">
@@ -40,10 +25,10 @@ include("./Public/sql/requestData.php");
                                     <div class="card-header">
                                         <div class="row justify-content-end align-items-center">
                                             <div class="col-auto mt-2">
-                                                <button class="btn btn-dark">
+                                                <a href="./ReclamosOperador.php" class="btn btn-dark">
                                                     Generar Gráfica
                                                     <i class="bi bi-bar-chart-line-fill"></i>
-                                                </button>
+                                                </a>
                                             </div>
                                             <div class="col-auto mt-2">
                                                 <button class="btn btn-primary" id="toExcel">
@@ -164,6 +149,10 @@ include("./Public/sql/requestData.php");
             columnDelimiter: ";"
         })
     })
+    </script>
+
+    <script>
+
     </script>
 </body>
 
